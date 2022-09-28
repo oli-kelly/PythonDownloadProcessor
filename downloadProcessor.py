@@ -9,18 +9,16 @@ import logging
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-print("HelloWorld")
-
-source_dir = "C:/Users/Admin/Downloads"
-dest_dir_zip = "C:/Users/Admin/Desktop/Downloaded Files/Zip Files"
-dest_dir_music = "C:/Users/Admin/Desktop/Downloaded Files/Audio Files"
-dest_dir_video = "C:/Users/Admin/Desktop/Downloaded Files/Video Files"
-dest_dir_image = "C:/Users/Admin/Desktop/Downloaded Files/Image Files"
-dest_dir_documents = "C:/Users/Admin/Desktop/Downloaded File/Word Document Files"
-dest_dir_spreadsheets = "C:/Users/Admin/Desktop/Downloaded Files/Spreadsheet Files"
-dest_dir_pdf = "C:/Users/Admin/Desktop/Downloaded Files/PDF Files"
-dest_dir_app = "C:/Users/Admin/Desktop/Downloaded Files/Programs & Installers"
-dest_dir_iso = "C:/Users/Admin/Desktop/Downloaded Files/ISO Files"
+source_dir = ""
+dest_dir_zip = ""
+dest_dir_music = ""
+dest_dir_video = ""
+dest_dir_image = ""
+dest_dir_documents = ""
+dest_dir_spreadsheets = ""
+dest_dir_pdf = ""
+dest_dir_app = ""
+dest_dir_iso = ""
 
 # ? supported Image types
 image_extensions = [".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi", ".png", ".gif", ".webp", ".tiff", ".tif", ".psd", ".raw", ".arw", ".cr2", ".nrw",
@@ -88,63 +86,63 @@ class DownloadProcessor(FileSystemEventHandler):
                     dest = dest_dir_music
                 move_file(dest, entry, name)
                 logging.info(f"Moved audio file: {name}")
-                toast.show_toast("Dowload Processor",f"Moved audio file: {name} to /Desktop/Downloaded Files/Audio Files",duration=2)
+                toast.show_toast("Dowload Processor",f"Moved audio file: {name} to ",duration=2)
 
     def check_video_files(self, entry, name):  # * Checks all Video Files
         for video_extension in video_extensions:
             if name.endswith(video_extension) or name.endswith(video_extension.upper()):
                 move_file(dest_dir_video, entry, name)
                 logging.info(f"Moved video file: {name}")
-                toast.show_toast("Dowload Processor",f"Moved video file: {name} to /Desktop/Downloaded Files/Video Files",duration=2)
+                toast.show_toast("Dowload Processor",f"Moved video file: {name} to ",duration=2)
 
     def check_image_files(self, entry, name):  # * Checks all Image Files
         for image_extension in image_extensions:
             if name.endswith(image_extension) or name.endswith(image_extension.upper()):
                 move_file(dest_dir_image, entry, name)
                 logging.info(f"Moved image file: {name}")
-                toast.show_toast("Dowload Processor",f"Moved image file: {name} to /Desktop/Downloaded Files/Image Files",duration=2)
+                toast.show_toast("Dowload Processor",f"Moved image file: {name} to ",duration=2)
 
     def check_document_files(self, entry, name):  # * Checks all Document Files
         for documents_extension in document_extensions:
             if name.endswith(documents_extension) or name.endswith(documents_extension.upper()):
                 move_file(dest_dir_documents, entry, name)
                 logging.info(f"Moved document file: {name}")
-                toast.show_toast("Dowload Processor",f"Moved document file: {name} to /Desktop/Downloaded Files/Document Files",duration=2)
+                toast.show_toast("Dowload Processor",f"Moved document file: {name} to ",duration=2)
 
     def check_zip_files(self, entry, name):  # * Checks all Zip Files
         for zip_extension in zip_extensions:
             if name.endswith(zip_extension) or name.endswith(zip_extension.upper()):
                 move_file(dest_dir_zip, entry, name)
                 logging.info(f"Moved zip file: {name}")
-                toast.show_toast("Dowload Processor",f"Moved zip file: {name} to /Desktop/Downloaded Files/Zip Files",duration=2)
+                toast.show_toast("Dowload Processor",f"Moved zip file: {name} to ",duration=2)
     
     def check_spreadsheet_files(self, entry, name):  # * Checks all Spreadsheet Files
         for spreadsheet_extension in spreadsheet_extensions:
             if name.endswith(spreadsheet_extension) or name.endswith(spreadsheet_extension.upper()):
                 move_file(dest_dir_spreadsheets, entry, name)
                 logging.info(f"Moved spreadsheet file: {name}")
-                toast.show_toast("Dowload Processor",f"Moved spreadsheet file: {name} to /Desktop/Downloaded Files/Spreadsheet Files",duration=2)
+                toast.show_toast("Dowload Processor",f"Moved spreadsheet file: {name} to ",duration=2)
                 
     def check_pdf_files(self, entry, name):  # * Checks all PDF Files
         for pdf_extension in pdf_extensions:
             if name.endswith(pdf_extension) or name.endswith(pdf_extension.upper()):
                 move_file(dest_dir_pdf, entry, name)
                 logging.info(f"Moved pdf file: {name}")
-                toast.show_toast("Dowload Processor",f"Moved pdf file: {name} to /Desktop/Downloaded Files/PDF Files",duration=2)
+                toast.show_toast("Dowload Processor",f"Moved pdf file: {name} to ",duration=2)
 
     def check_app_files(self, entry, name):  # * Checks all PDF Files
         for app_extension in app_extensions:
             if name.endswith(app_extension) or name.endswith(app_extension.upper()):
                 move_file(dest_dir_app, entry, name)
                 logging.info(f"Moved app file: {name}")
-                toast.show_toast("Dowload Processor",f"Moved app file: {name} to /Desktop/Downloaded Files/Programs & Installers",duration=2)            
+                toast.show_toast("Dowload Processor",f"Moved app file: {name} to ",duration=2)            
 
     def check_iso_files(self, entry, name):  # * Checks all PDF Files
         for iso_extension in iso_extensions:
             if name.endswith(iso_extension) or name.endswith(iso_extension.upper()):
                 move_file(dest_dir_app, entry, name)
                 logging.info(f"Moved app file: {name}")
-                toast.show_toast("Dowload Processor",f"Moved iso file: {name} to /Desktop/Downloaded Files/ISO Files",duration=2)              
+                toast.show_toast("Dowload Processor",f"Moved iso file: {name} to ",duration=2)              
 
 print ("Done")
 #Taken from https://pypi.org/project/watchdog/
