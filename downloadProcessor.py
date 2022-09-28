@@ -20,6 +20,7 @@ dest_dir_documents = "C:/Users/Admin/Desktop/Downloaded File/Word Document Files
 dest_dir_spreadsheets = "C:/Users/Admin/Desktop/Downloaded Files/Spreadsheet Files"
 dest_dir_pdf = "C:/Users/Admin/Desktop/Downloaded Files/PDF Files"
 dest_dir_app = "C:/Users/Admin/Desktop/Downloaded Files/Programs & Installers"
+dest_dir_iso = "C:/Users/Admin/Desktop/Downloaded Files/ISO Files"
 
 # ? supported Image types
 image_extensions = [".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi", ".png", ".gif", ".webp", ".tiff", ".tif", ".psd", ".raw", ".arw", ".cr2", ".nrw",
@@ -39,7 +40,8 @@ pdf_extensions = [".pdf"]
 zip_extensions = [".zip", ".rar"]
 # ? supported App types
 app_extensions = [".exe", ".msi"]
-
+# ? supported ISO types
+iso_extensions = [".iso"]
 
 toast = ToastNotifier()
 toast.show_toast("Dowload Processor","The download organiser process has been started",duration=2)
@@ -74,6 +76,7 @@ class DownloadProcessor(FileSystemEventHandler):
                 self.check_pdf_files(entry, name)
                 self.check_zip_files(entry, name)
                 self.check_app_files(entry, name)
+                self.check_iso_files(entry, name)
 
 
     def check_audio_files(self, entry, name):  # * Checks all Audio Files
@@ -135,6 +138,13 @@ class DownloadProcessor(FileSystemEventHandler):
                 move_file(dest_dir_app, entry, name)
                 logging.info(f"Moved app file: {name}")
                 toast.show_toast("Dowload Processor",f"Moved app file: {name} to /Desktop/Downloaded Files/Programs & Installers",duration=2)            
+
+    def check_iso_files(self, entry, name):  # * Checks all PDF Files
+        for iso_extension in iso_extensions:
+            if name.endswith(iso_extension) or name.endswith(iso_extension.upper()):
+                move_file(dest_dir_app, entry, name)
+                logging.info(f"Moved app file: {name}")
+                toast.show_toast("Dowload Processor",f"Moved iso file: {name} to /Desktop/Downloaded Files/ISO Files",duration=2)              
 
 print ("Done")
 #Taken from https://pypi.org/project/watchdog/
