@@ -20,15 +20,15 @@ dest_dir_pdf = ""
 dest_dir_app = ""
 dest_dir_iso = ""
 
-# ? supported Image types
+# Image types
 image_extensions = [".jpg", ".jpeg", ".jpe", ".jif", ".jfif", ".jfi", ".png", ".gif", ".webp", ".tiff", ".tif", ".psd", ".raw", ".arw", ".cr2", ".nrw",
                     ".k25", ".bmp", ".dib", ".heif", ".heic", ".ind", ".indd", ".indt", ".jp2", ".j2k", ".jpf", ".jpf", ".jpx", ".jpm", ".mj2", ".svg", ".svgz", ".ai", ".eps", ".ico"]
-# ? supported Video types
+# Video types
 video_extensions = [".webm", ".mpg", ".mp2", ".mpeg", ".mpe", ".mpv", ".ogg",
                     ".mp4", ".mp4v", ".m4v", ".avi", ".wmv", ".mov", ".qt", ".flv", ".swf", ".avchd"]
-# ? supported Audio types
+# Audio types
 audio_extensions = [".m4a", ".flac", "mp3", ".wav", ".wma", ".aac"]
-# ? supported Word Document types
+# Word Document types
 document_extensions = [".doc", ".docx", ".odt"]
 # ? supported Spreadsheet types
 spreadsheet_extensions = [".xls", ".xlsx", ".csv"]
@@ -76,68 +76,70 @@ class DownloadProcessor(FileSystemEventHandler):
                 self.check_app_files(entry, name)
                 self.check_iso_files(entry, name)
 
+    def process_files(type, extensions, dest, self, entry, name):
+        for type in extensions:
+            if name.endswith(type) or name.endswith(type.upper()):
+                move_file(dest, entry, name)
+                logging.info(f"Moved "+type+" file: {name}")
+                toast.show_toast("Dowload Processor",f"Moved "+type+" file: {name} to ",duration=2)
 
-    def check_audio_files(self, entry, name):  # * Checks all Audio Files
+    def check_audio_files(self, entry, name):  # Checks all Audio Files
         for audio_extension in audio_extensions:
             if name.endswith(audio_extension) or name.endswith(audio_extension.upper()):
-                if entry.stat().st_size < 10_000_000 or "SFX" in name:  # ? 10Megabytes
-                    dest = dest_dir_music
-                else:
-                    dest = dest_dir_music
-                move_file(dest, entry, name)
+                move_file(dest_dir_music, entry, name)
                 logging.info(f"Moved audio file: {name}")
                 toast.show_toast("Dowload Processor",f"Moved audio file: {name} to ",duration=2)
 
-    def check_video_files(self, entry, name):  # * Checks all Video Files
+    def check_video_files(self, entry, name):  # Checks all Video Files
         for video_extension in video_extensions:
             if name.endswith(video_extension) or name.endswith(video_extension.upper()):
                 move_file(dest_dir_video, entry, name)
                 logging.info(f"Moved video file: {name}")
                 toast.show_toast("Dowload Processor",f"Moved video file: {name} to ",duration=2)
 
-    def check_image_files(self, entry, name):  # * Checks all Image Files
+    def check_image_files(self, entry, name):  # Checks all Image Files
         for image_extension in image_extensions:
             if name.endswith(image_extension) or name.endswith(image_extension.upper()):
                 move_file(dest_dir_image, entry, name)
                 logging.info(f"Moved image file: {name}")
                 toast.show_toast("Dowload Processor",f"Moved image file: {name} to ",duration=2)
 
-    def check_document_files(self, entry, name):  # * Checks all Document Files
+    def check_document_files(self, entry, name):  # Checks all Document Files
         for documents_extension in document_extensions:
             if name.endswith(documents_extension) or name.endswith(documents_extension.upper()):
                 move_file(dest_dir_documents, entry, name)
                 logging.info(f"Moved document file: {name}")
                 toast.show_toast("Dowload Processor",f"Moved document file: {name} to ",duration=2)
 
-    def check_zip_files(self, entry, name):  # * Checks all Zip Files
+    def check_zip_files(self, entry, name):  # Checks all Zip Files
         for zip_extension in zip_extensions:
             if name.endswith(zip_extension) or name.endswith(zip_extension.upper()):
                 move_file(dest_dir_zip, entry, name)
                 logging.info(f"Moved zip file: {name}")
                 toast.show_toast("Dowload Processor",f"Moved zip file: {name} to ",duration=2)
     
-    def check_spreadsheet_files(self, entry, name):  # * Checks all Spreadsheet Files
+    def check_spreadsheet_files(self, entry, name):  # Checks all Spreadsheet Files
         for spreadsheet_extension in spreadsheet_extensions:
             if name.endswith(spreadsheet_extension) or name.endswith(spreadsheet_extension.upper()):
                 move_file(dest_dir_spreadsheets, entry, name)
                 logging.info(f"Moved spreadsheet file: {name}")
                 toast.show_toast("Dowload Processor",f"Moved spreadsheet file: {name} to ",duration=2)
                 
-    def check_pdf_files(self, entry, name):  # * Checks all PDF Files
+    def check_pdf_files(self, entry, name):  # Checks all PDF Files
         for pdf_extension in pdf_extensions:
             if name.endswith(pdf_extension) or name.endswith(pdf_extension.upper()):
                 move_file(dest_dir_pdf, entry, name)
                 logging.info(f"Moved pdf file: {name}")
                 toast.show_toast("Dowload Processor",f"Moved pdf file: {name} to ",duration=2)
 
-    def check_app_files(self, entry, name):  # * Checks all PDF Files
+    def check_app_files(self, entry, name):  # Checks all PDF Files
         for app_extension in app_extensions:
             if name.endswith(app_extension) or name.endswith(app_extension.upper()):
                 move_file(dest_dir_app, entry, name)
                 logging.info(f"Moved app file: {name}")
                 toast.show_toast("Dowload Processor",f"Moved app file: {name} to ",duration=2)            
 
-    def check_iso_files(self, entry, name):  # * Checks all PDF Files
+    def check_iso_files(self, entry, name):  # Checks all PDF Files
         for iso_extension in iso_extensions:
             if name.endswith(iso_extension) or name.endswith(iso_extension.upper()):
                 move_file(dest_dir_app, entry, name)
